@@ -6,7 +6,7 @@ package:
   version: {{ version }}
 
 source:
-  - url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/InstructorEmbedding-{{ version }}.tar.gz
+  - url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/InstructorEmbedding-{{ version }}.tar.gz
     sha256: 886495ddd561bad57e8e7d5e8ee44c4243b1d80b538a25d32d37350f6082ee62
   - url: https://raw.githubusercontent.com/HKUNLP/instructor-embedding/a453a3637b7e6a71c4d326a7414c0ca1d353eaa0/LICENSE
     sha256: c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4
@@ -15,14 +15,14 @@ source:
 build:
   noarch: python
   script: {{ PYTHON }} -m pip install . -vv
-  number: 0
+  number: 1
 
 requirements:
   host:
-    - python >=3.7
+    - python {{ python_min }}
     - pip
   run:
-    - python >=3.7
+    - python >={{ python_min }}
     - transformers 4.20.0
     - datasets >=2.2.0
     - jsonlines
@@ -42,6 +42,7 @@ test:
     - pip check
   requires:
     - pip
+    - python {{ python_min }}
 
 about:
   home: https://github.com/HKUNLP/instructor-embedding
